@@ -1,4 +1,4 @@
-package com.healthcaredelivery.healthcareblog.controller;
+⁸package com.healthcaredelivery.healthcareblog.controller;
 
 import com.healthcaredelivery.healthcareblog.entity.Blog;
 import com.healthcaredelivery.healthcareblog.entity.User;
@@ -28,7 +28,7 @@ public class KafkaConsumer {
     String url = "http://localhost:3000/blog/";
 
 //   Nursing Mothers
-    @KafkaListener(topics = "1", groupId = "my-group")
+    @KafkaListener(topics = "nursing-mothers", groupId = "my-group")
     public void listenToPregnantWomenEvent(Blog blog){
         List<User> users = userRepository.findByTopicId(blog.getTopic().getId());
         String message = String.format("A new article has been published on %s.\n%s\nYou can read more at %s"
@@ -42,7 +42,7 @@ public class KafkaConsumer {
     }
 
 //  Pregnant Women
-    @KafkaListener(topics = "2", groupId = "my-group")
+    @KafkaListener(topics = "preg-women", groupId = "my-group")
     public void listenNursingMothersEvent(Blog blog){
         List<User> users = userRepository.findByTopicId(blog.getTopic().getId());
         String message = String.format("A new article has been published on %s.\n%s\nYou can read more at %s"
@@ -54,7 +54,7 @@ public class KafkaConsumer {
     }
 
 //  Reproductive Women
-    @KafkaListener(topics = "3", groupId = "my-group")
+    @KafkaListener(topics = "reproductive-women", groupId = "my-group")
     public void listenToReproductiveWomenEvent(Blog blog){
         List<User> users = userRepository.findByTopicId(blog.getTopic().getId());
         String message = String.format("A new article has been published on %s.\n%s\nYou can read more at %s"
